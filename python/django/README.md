@@ -240,11 +240,63 @@ class PostSerializer(serializers.ModelSerializer):
 DRF runs these automatically when you call .is_valid() on the serializer. 
 
 ***Note***:
-`PostSerializer` is a custome nameing  it follows 
+`PostSerializer` is a custom naming  it follows 
 `Post` = `PostSerializer`
 `User` = `UserSerializer`
+Validation and Control of fields can be done on both  `ModelSerializer`(authomatic) and `Serializer`(manual)
 
 `class Meta` - Special Built-in Inner Class
 - Django look for it
 - It tells the seriliazer how to behave
 - Inside is where you specify the model use, which fiels to include etc.
+
+
+## Views and Routers
+They help connect your model to ouside world(APIs endpoint)
+* Views = Defines the logic(`GET`,`POST`, `PUT`, `DELETE`).
+* Routers: Autogenerate URLs for views. 
+
+**steps-by-step- DRF Views + Routers**:
+1. Created viewSet
+```python 
+# example_app/views.py
+from rest_framework import viewsets
+from .model import Post
+from .serializers import PostSerializer
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all()
+    serilizer_class = PostSerializer
+```
+`ModelViewSet` gives you CRUD: list, retrieve, create, update, delete 
+
+2. Create Router and Register ViewSet
+```python
+# example_app/urls.py
+
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import PostViewSet
+
+router = DefaultRouter()
+router.egister(r'post', PostViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
+```
+
+3. Include This in the project urls.py
+```python 
+# example_project/urls.py
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include('blog.urls')),
+]
+```
+
+you can run your app by
+`python manage.py runserver`
