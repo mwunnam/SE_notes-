@@ -39,23 +39,28 @@ _Its gives you everything you need out of the box_
 
 
 ## Setting up Django and Folder Structure
-To start a project
+**To start a project**
+
 1. create a directory with the project name and cd into it
+    
     `mkdir example_project`
 
     `cd example_project`
 
 2. Create a virtual environment and activate it 
+    
     `python3 -m venv venv`
     
     `source venv/bin/activate`
 
 3. Install Django and Django REST Framework 
+    
     `pip install django`
     
     `pip install djangorestframework`
 
 4. Set up a new project with a single application
+    
     `django-admin startproject example_project`
     
     `cd exapmle_project`
