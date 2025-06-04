@@ -1,20 +1,20 @@
 # DJANGO
 
-[] What is django
-[] Django project sturcture
-[] How to create a project and application
-[] Models
-[] Serializers
-[] Admin Interface
-[] Templates
-[] CRUD Operations (create, Read, update, Delete)
+- [ ] What is django
+- [ ] Django project sturcture
+- [ ] How to create a project and application
+- [ ] Models
+- [ ] Serializers
+- [ ] Admin Interface
+- [ ] Templates
+- [ ] CRUD Operations (create, Read, update, Delete)
 
 
 ### Django
 This is a high-level Python web framework which is used in building a secure, scallable and maintainable web applications quickly
 
 _Its gives you everything you need out of the box_
-** Key Features 
+**Key Features**
 - Routing system builty in 
 - Database connection and ORM
 - User authentication and permissions
