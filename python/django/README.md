@@ -108,9 +108,11 @@ After you define a model you need to:
 
 ## Example of a Model
 ```Python
+# example_app/models.py
+
 import django.db import models
 
-class Post(model.Models):
+class Post(models.Model):
     author = models.ForeignKey(User, on_delete=model.CASCADE)
     title = models.CharField(max_length=200)
     content = models.TextField()
@@ -127,5 +129,63 @@ class Rating(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
-
 ```
+
+## Serializers 
+The heart beat of Django REST Framework 
+* More like a translator between python objects e.g., Django model and JSON(used in APIs)
+
+**Uses**
+- Converts model instance to JSON(for reponse)
+- Converts JSON input to Python objects(for creating/updating)
+- Define what fields are visible or editable
+
+### Two Common Type of Serializers 
+1. **ModelSerializer (used 90% of the time)**:
+e.g.,
+```Python
+from rest_framework import serializers
+from .models import Post
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post 
+        fields = '__all__' # This list specific fields in the model 
+```
+
+2. **Manual Serializers**
+```Python
+class ManualPostSerializer(serializers.Serializer):
+    title = serializers.CharField(max_length=200)
+    content = serializer.CharField()
+    created_at = serializer.DateTimeField(read_only=True)
+
+    def create(self, validated_data):
+        return Post.objects.create(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.content = validated_data.get('content', instance.content)
+        instance.save()
+        return instance 
+```
+- With this you have full controll 
+- Good for custom validation
+- APIs are not tied to a model
+
+**You can also add Custom Validation**
+```Python
+def validate_title(self, value):
+    if "badword" in value.lower():
+        raise serializers.ValidationError("Title is not allowed.")
+    return value 
+```
+**You can Control Fields
+```Python
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['id', 'title', 'created_at']
+        read_only_fields = ['id', 'created']
+```
+
