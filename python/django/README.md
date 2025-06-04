@@ -1,6 +1,6 @@
 # DJANGO
 
-- [ ] What is django
+- [x] What is django
 - [ ] Django project sturcture
 - [ ] How to create a project and application
 - [ ] Models
