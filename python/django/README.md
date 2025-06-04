@@ -80,7 +80,16 @@ _Its gives you everything you need out of the box_
 
 
 ## File Structure
-```text
-example_project/ |--Javascript/ |-- variables 
 
-```
+
+## Models
+Defines the database structure
+Each class is a database table
+Each attribute is  column(field) in that table 
+
+### Common Fields Types 
+|Fields| what they do|
+|------|-------------|
+|TexField| Long text(content, description)|
+|IntegerField| Whole numbers |
+|CharField| Short string(name, title)|
