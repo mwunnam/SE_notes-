@@ -118,17 +118,33 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title
+
 class Comment(models.Model):
     Post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DataTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.content
+
 class Rating(models.Model):
     post = model.ForeignKey(Post, on_delete=models.CASCADE, related_name="rating")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.score
+```
+In the model calss you can define `__Str__` method
+This tells Django how to represent the object as a string. You can return anything. 
+eg 
+```python
+return f"{self.title} by {self.author}.
+return f"{self.task} - {"Done" if sefl.complete else "Pending"}
 ```
 
 ## Serializers 
@@ -153,6 +169,29 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__' # This list specific fields in the model 
 ```
 
+Adding validation and control to Serialization class
+```python
+from rest_framework import serializers
+from .models import Post
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']
+
+    def validate_title(self, value):
+        if "spam" in value.lower():
+            raise serializers.ValidationError("No spam allowed.")
+        return value
+
+    def validate(self, data):
+        if data['title'] == data['content']:
+            raise serializers.ValidationError("Title and content cannot be the same")
+        return data
+```
+DRF runs these automatically when you call .is_valid() on the serializer. 
+
+
 2. **Manual Serializers**
 ```Python
 class ManualPostSerializer(serializers.Serializer):
@@ -172,6 +211,17 @@ class ManualPostSerializer(serializers.Serializer):
 - With this you have full controll 
 - Good for custom validation
 - APIs are not tied to a model
+`validated_data` is a dictionary of all the cleanded, validated data from the request
+`**validated_data` unpacks the dictionary like: `Post(title=".....", content="...")`
+`instance` is the current model object being updated
+`validated_data` contains the new data
+`.save()` persist the data after updating fields by call this
+
+|Method| When it Runs | Purpose|
+|------|--------------|--------|
+|create()|`serializer.save()` after `POST`| Creates a new object|
+|`update()| `serializer.save()` after `PUT/PATCH`| Updates an existing object|
+|**validated_data| cleaner data from request| Used like kwargs in model creation|
 
 **You can also add Custom Validation**
 ```Python
@@ -188,4 +238,12 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'created_at']
         read_only_fields = ['id', 'created']
 ```
+Note:
+`PostSerializer` is a custome nameing  it follows 
+`Post` = `PostSerializer`
+`User` = `UserSerializer`
 
+`class Meta` - Special Built-in Inner Class
+- Django look for it
+- It tells the seriliazer how to behave
+- Inside is where you specify the model use, which fiels to include etc.
