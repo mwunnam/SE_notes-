@@ -88,8 +88,44 @@ Each class is a database table
 Each attribute is  column(field) in that table 
 
 ### Common Fields Types 
-|Fields| what they do|
+|Fields| Used For|
 |------|-------------|
-|TexField| Long text(content, description)|
-|IntegerField| Whole numbers |
-|CharField| Short string(name, title)|
+|`TexField`| Long text(content, description)|
+|`IntegerField`| Whole numbers |
+|`CharField`| Short string(name, title)|
+|`FloatField`, `DecimalField`| Decimals(prices, rates)|
+|`BooleanField`| Yes/No, True/False|
+|`DateTimeField`| Timestamps|
+|`EmailField`, `URLField`| Email and websites URLs|
+|`ForeignKey`| Link to another model 1:N|
+|`ManyToManyField`| Many-to-many relations|
+|`OneToOneField`| One-to-one relation|
+
+After you define a model you need to:
+* `python manage.py makemigrations` - Creates migration file 
+* `python manage.py migrate` - Applies them to the db  
+
+
+## Example of a Model
+```Python
+import django.db import models
+
+class Post(model.Models):
+    author = models.ForeignKey(User, on_delete=model.CASCADE)
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class Comment(models.Model):
+    Post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DataTimeField(auto_now_add=True)
+
+class Rating(models.Model):
+    post = model.ForeignKey(Post, on_delete=models.CASCADE, related_name="rating")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+```
