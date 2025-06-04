@@ -14,6 +14,7 @@
 This is a high-level Python web framework which is used in building a secure, scallable and maintainable web applications quickly
 
 _Its gives you everything you need out of the box_
+
 **Key Features**
 - Routing system builty in 
 - Database connection and ORM
@@ -34,3 +35,39 @@ _Its gives you everything you need out of the box_
 - Secure - Follows best practices
 - Scalable - used by companies like Instagram and Pinterest 
 - Extensible - you can plug in tools like Django REST Framework, Celery, etc
+
+
+
+## Setting up Django and Folder Structure
+To start a project
+1. create a directory with the project name and cd into it
+    `mkdir example_project`
+    `cd example_project`
+
+2. Create a virtual environment and activate it 
+    `python3 -m venv venv`
+    `source venv/bin/activate`
+
+3. Install Django and Django REST Framework 
+    `pip install django`
+    `pip install djangorestframework`
+
+4. Set up a new project with a single application
+    `django-admin startproject example_project`
+    `cd exapmle_project`
+    `django-admin startapp example_app`
+    `cd example_app`
+
+5. Sync database for the first time 
+    `python manage.py migrate`
+
+6. Create super user
+    `python createsuperuser`
+    follow the prompt 
+
+
+## File Structure
+```text
+example_project/ |--Javascript/ |-- variables 
+
+```
