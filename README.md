@@ -1,15 +1,17 @@
-# SOFTWARE ENGINERING NOTES
+# SOFTWARE ENGINEERING NOTES
 
-## Table Of Content
+## Table of Contents
+
 ### JavaScript
-#### -[**JavaScript**] (javascript/variables.md)
-#### -[**JavaScript**] (javascript/functions.md)
-#### -[**JavaScript**] (javascript/DOM.md)
-#### -[**JavaScript**] (javascript/eventlisteners.md)
-#### -[**JavaScript**] (javascript/examples.md)
+- [Variables](javascript/variables.md)
+- [Functions](javascript/functions.md)
+- [DOM](javascript/DOM.md)
+- [Event Listeners](javascript/eventlisteners.md)
+- [Examples](javascript/examples.md)
+
 ### Python
-#### -[**Variables**] (python/variables.md)
-#### -[**Functions**] (python/functions.md)
-#### -[**something**] (python/something.md)
-#### -[**somthing**] (python/something.md)
-#### -[**Examples**] (python/examples.md)
+- [Variables](python/variables.md)
+- [Functions](python/functions.md)
+- [Loops / Conditionals](python/something.md)
+- [Data Structures](python/something.md)
+- [Examples](python/examples.md)
