@@ -180,7 +180,7 @@ def validate_title(self, value):
         raise serializers.ValidationError("Title is not allowed.")
     return value 
 ```
-**You can Control Fields
+**You can Control Fields**
 ```Python
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
