@@ -169,27 +169,6 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__' # This list specific fields in the model 
 ```
 
-Adding validation and control to Serialization class
-```python
-from rest_framework import serializers
-from .models import Post
-
-class PostSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Post
-        fields = ['title', 'content']
-
-    def validate_title(self, value):
-        if "spam" in value.lower():
-            raise serializers.ValidationError("No spam allowed.")
-        return value
-
-    def validate(self, data):
-        if data['title'] == data['content']:
-            raise serializers.ValidationError("Title and content cannot be the same")
-        return data
-```
-DRF runs these automatically when you call .is_valid() on the serializer. 
 
 
 2. **Manual Serializers**
@@ -219,9 +198,9 @@ class ManualPostSerializer(serializers.Serializer):
 
 |Method| When it Runs | Purpose|
 |------|--------------|--------|
-|create()|`serializer.save()` after `POST`| Creates a new object|
-|`update()| `serializer.save()` after `PUT/PATCH`| Updates an existing object|
-|**validated_data| cleaner data from request| Used like kwargs in model creation|
+|`create()`|`serializer.save()` after `POST`| Creates a new object|
+|`update()`| `serializer.save()` after `PUT/PATCH`| Updates an existing object|
+|`**validated_data`| cleaner data from request| Used like kwargs in model creation|
 
 **You can also add Custom Validation**
 ```Python
@@ -238,7 +217,29 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'created_at']
         read_only_fields = ['id', 'created']
 ```
-Note:
+**Adding validation and control to Serialization class**
+```python
+from rest_framework import serializers
+from .models import Post
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']
+
+    def validate_title(self, value):
+        if "spam" in value.lower():
+            raise serializers.ValidationError("No spam allowed.")
+        return value
+
+    def validate(self, data):
+        if data['title'] == data['content']:
+            raise serializers.ValidationError("Title and content cannot be the same")
+        return data
+```
+DRF runs these automatically when you call .is_valid() on the serializer. 
+
+***Note***:
 `PostSerializer` is a custome nameing  it follows 
 `Post` = `PostSerializer`
 `User` = `UserSerializer`
