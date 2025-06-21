@@ -69,7 +69,7 @@ RUN npm install
 
 | Term         | Description                                                     |
 |--------------|-----------------------------------------------------------------|
-| `Dockerfile` | Text file with instructions to build a Docker image            |
+| `Dockerfile` | Text file with instructions to build a Docker image             |
 | `Image`      | Snapshot of a container, built from a Dockerfile                |
 | `Container`  | A running instance of an image                                  |
 | `Docker Hub` | Public registry for Docker images                               |
@@ -80,24 +80,25 @@ RUN npm install
 
 ### 💻 Common Docker Commands
 
-Build an image
+```Docker 
+# Build an image
 `docker build -t myapp .`
 
-Run a container
+# Run a container
 `docker run -d -p 5000:5000 myapp`
 
-List running containers
+# List running containers
 `docker ps`
 
-Stop a container
+# Stop a container
 `docker stop <container_id>`
 
-Remove a container
+# Remove a container
 `docker rm <container_id>`
 
-Remove an image
+# Remove an image
 `docker rmi myapp`
-
+```
 ---
 
 ### ✅ Benefits of Docker
