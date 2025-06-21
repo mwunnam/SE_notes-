@@ -80,25 +80,23 @@ RUN npm install
 
 ### 💻 Common Docker Commands
 
-\`\`\`bash
-# Build an image
-docker build -t myapp .
+Build an image
+`docker build -t myapp .`
 
-# Run a container
-docker run -d -p 5000:5000 myapp
+Run a container
+`docker run -d -p 5000:5000 myapp`
 
-# List running containers
-docker ps
+List running containers
+`docker ps`
 
-# Stop a container
-docker stop <container_id>
+Stop a container
+`docker stop <container_id>`
 
-# Remove a container
-docker rm <container_id>
+Remove a container
+`docker rm <container_id>`
 
-# Remove an image
-docker rmi myapp
-\`\`\`
+Remove an image
+`docker rmi myapp`
 
 ---
 
@@ -126,12 +124,10 @@ It links services, manages networks, and handles volumes through a single config
 
 ### ⚙️ Example Commands
 
-\`\`\`bash
-# Start all services defined in docker-compose.yml
-docker-compose up
+Start all services defined in docker-compose.yml
+`docker-compose up`
 
-# Stop and remove all services and resources
-docker-compose down
-\`\`\`
+Stop and remove all services and resources
+`docker-compose down`
 
 **Use Case:** Ideal for local development or small-scale environments running multiple services (e.g., a web app + database).
