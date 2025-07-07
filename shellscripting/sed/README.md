@@ -16,4 +16,5 @@ you can also do
 ## Most Common `sed` Commands
 
 |comand| Description| Example|
+|------|------------|--------|
 |s/pattern/replacement/|**Substitute** first match on a line| `sed` 's/cat/dog/'|
